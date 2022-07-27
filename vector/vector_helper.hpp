@@ -1,31 +1,36 @@
 #include "gtest/gtest.h"
 #include "gmock/gmock.h"
 
+#include <type_traits>
+
 #include "vector.hpp"
 #include <vector>
 
 // Fixture for testing
 namespace {
-
 	class VectorTest : public ::testing::Test {
 	protected:
 		ft::vector<int> ftvector;
 		std::vector<int> stdvector;
 	};
-
 }
 
 namespace ft {
-
 	template<typename T>
 	std::ostream& operator<<(std::ostream& os, const ft::vector<T>& v) {
 		os << "ft::vector: size: " << v.size() << ", capacity: " << v.capacity() << ", max size: " << v.max_size();
+		for (typename ft::vector<T>::iterator it = v.begin(); it != v.end(); ++it)
+			os << *it << " ";
+		os << "]";
 		return os;
 	}
 
 	template<typename T>
 	std::ostream& operator<<(std::ostream& os, const std::vector<T>& v) {
 		os << "std::vector: size: " << v.size() << ", capacity: " << v.capacity() << ", max size: " << v.max_size();
+		for (typename std::vector<T>::iterator it = v.begin(); it != v.end(); ++it)
+			os << *it << " ";
+		os << "]";
 		return os;
 	}
 

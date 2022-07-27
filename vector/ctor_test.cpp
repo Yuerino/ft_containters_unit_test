@@ -1,8 +1,4 @@
-#include "gmock/gmock.h"
-#include "gtest/gtest.h"
 #include "vector_helper.hpp"
-
-#include <type_traits>
 
 namespace {
 
