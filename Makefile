@@ -1,62 +1,36 @@
-# Points to the root of Google Test, relative to where this file is.
+
 GTEST_DIR		=	./googletest/googletest
+GMOCK_DIR		=	./googletest/googlemock
 
-# Flags passed to the preprocessor.
-# Set Google Test's header directory as a system directory, such that
-# the compiler doesn't generate warnings in Google Test headers.
-CPPFLAGS		+=	-isystem $(GTEST_DIR)/include
+GTEST_SRCS		=	$(GTEST_DIR)/src/gtest-all.cc
+GTEST_OBJS		=	$(GTEST_SRCS:.cc=.o)
 
-# Flags passed to the C++ compiler.
-CXXFLAGS		+=	-g -Wall -Wextra -Werror -pthread -std=c++14
-
-# GCC Compiler
-CXX				=	clang++
-
-# All Google Test headers.  Usually you shouldn't change this
-# definition.
-GTEST_HEADERS	=	$(GTEST_DIR)/include/gtest/*.h \
-					$(GTEST_DIR)/include/gtest/internal/*.h
-
-# Usually you shouldn't tweak such internal variables, indicated by a
-# trailing _.
-GTEST_SRCS_		=	$(GTEST_DIR)/src/*.cc $(GTEST_DIR)/src/*.h $(GTEST_HEADERS)
-
-# Name of tester
 NAME			=	unit_test
 
-# Where to find user test code.
-TEST_DIR		=	.
+USER_HEADERS	=	..
 
-# All tests produced by this Makefile.  Remember to add new tests you
-# created to the list.
-TEST_SRC		=	is_integral_test.cpp
+CXX				=	clang++
+
+CPPFLAGS		+=	-isystem $(GTEST_DIR)/include -isystem $(GMOCK_DIR)/include -I$(GTEST_DIR) -I$(GMOCK_DIR) -I$(USER_HEADERS)
+
+CXXFLAGS		+=	-g -Wall -Wextra -Werror -pthread -std=c++14
+
+SRC				=	main.cpp
+OBJ				=	$(SRC:.cpp=.o)
+
+# vector test
+VECTOR_DIR		=	vector/
+VECTOR_SRCS		=	ctor_test.cpp pushback_test.cpp
+VECTOR_OBJS		=	$(addprefix $(VECTOR_DIR), $(VECTOR_SRCS:.cpp=.o))
 
 .PHONY: all clean re
 
 all: $(NAME)
 
+$(NAME): $(VECTOR_OBJS) $(GTEST_OBJS) $(OBJ) Makefile
+		$(CXX) $(CXXFLAGS) $(CPPFLAGS) -lpthread $(VECTOR_OBJS) $(GTEST_OBJS) $(OBJ) -o $(NAME)
+
 clean:
-		rm -rf $(NAME) gtest.a gtest_main.a *.o *.dSYM
+		$(RM) $(NAME) $(GTEST_OBJS) $(VECTOR_OBJS) $(OBJ)
 
 re: clean all
-
-# Builds gtest.a and gtest_main.a.
-
-# For simplicity and to avoid depending on Google Test's
-# implementation details, the dependencies specified below are
-# conservative and not optimized.  This is fine as Google Test
-# compiles fast and for ordinary users its source rarely changes.
-gtest-all.o: $(GTEST_SRCS_)
-		$(CXX) $(CPPFLAGS) -I$(GTEST_DIR) $(CXXFLAGS) -c $(GTEST_DIR)/src/gtest-all.cc
-
-gtest_main.o: $(GTEST_SRCS_)
-		$(CXX) $(CPPFLAGS) -I$(GTEST_DIR) $(CXXFLAGS) -c $(GTEST_DIR)/src/gtest_main.cc
-
-gtest.a: gtest-all.o
-		$(AR) $(ARFLAGS) $@ $^
-
-gtest_main.a: gtest-all.o gtest_main.o
-		$(AR) $(ARFLAGS) $@ $^
-
-$(NAME): $(TEST_SRC) $(GTEST_HEADERS) gtest_main.a
-		$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread gtest_main.a $(TEST_SRC) -o $(NAME)
