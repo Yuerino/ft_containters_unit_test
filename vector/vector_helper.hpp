@@ -2,9 +2,16 @@
 #include "gmock/gmock.h"
 
 #include <type_traits>
+#include <memory>
+#include <list>
+#include <sstream>
 
 #include "vector.hpp"
 #include <vector>
+
+#ifndef TEST_SIZE
+#define TEST_SIZE 1000
+#endif
 
 // Fixture for testing
 namespace {
@@ -18,8 +25,8 @@ namespace {
 namespace ft {
 	template<typename T>
 	std::ostream& operator<<(std::ostream& os, const ft::vector<T>& v) {
-		os << "ft::vector: size: " << v.size() << ", capacity: " << v.capacity() << ", max size: " << v.max_size();
-		for (typename ft::vector<T>::iterator it = v.begin(); it != v.end(); ++it)
+		os << "ft::vector: size: " << v.size() << ", capacity: " << v.capacity() << ", max size: " << v.max_size() << "\n[ ";
+		for (typename ft::vector<T>::const_iterator it = v.begin(); it != v.end(); ++it)
 			os << *it << " ";
 		os << "]";
 		return os;
@@ -27,8 +34,8 @@ namespace ft {
 
 	template<typename T>
 	std::ostream& operator<<(std::ostream& os, const std::vector<T>& v) {
-		os << "std::vector: size: " << v.size() << ", capacity: " << v.capacity() << ", max size: " << v.max_size();
-		for (typename std::vector<T>::iterator it = v.begin(); it != v.end(); ++it)
+		os << "std::vector: size: " << v.size() << ", capacity: " << v.capacity() << ", max size: " << v.max_size() << "\n[ ";
+		for (typename std::vector<T>::const_iterator it = v.begin(); it != v.end(); ++it)
 			os << *it << " ";
 		os << "]";
 		return os;
