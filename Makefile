@@ -1,4 +1,3 @@
-
 GTEST_DIR		=	./googletest/googletest
 GMOCK_DIR		=	./googletest/googlemock
 
@@ -9,28 +8,41 @@ NAME			=	unit_test
 
 USER_HEADERS	=	..
 
-CXX				=	clang++
+TEST_HEADERS	=	./include
 
-CPPFLAGS		+=	-isystem $(GTEST_DIR)/include -isystem $(GMOCK_DIR)/include -I$(GTEST_DIR) -I$(GMOCK_DIR) -I$(USER_HEADERS)
+CXX				=	g++-11
 
-CXXFLAGS		+=	-g -Wall -Wextra -Werror -pthread -std=c++14
+CPPFLAGS		+=	-isystem $(GTEST_DIR)/include -isystem $(GMOCK_DIR)/include \
+					-isystem $(GTEST_DIR) -isystem $(GMOCK_DIR) \
+					-isystem $(TEST_HEADERS) -isystem . -I$(USER_HEADERS)
+
+CXXFLAGS		+=	-g -Wall -Wextra -Werror -pthread -std=c++17 -DTEST_EXACT -D VECTOR_DEBUG
 
 SRC				=	main.cpp
 OBJ				=	$(SRC:.cpp=.o)
 
-# vector test
-VECTOR_DIR		=	vector/
-VECTOR_SRCS		=	ctor_test.cpp pushback_test.cpp
-VECTOR_OBJS		=	$(addprefix $(VECTOR_DIR), $(VECTOR_SRCS:.cpp=.o))
-
-.PHONY: all clean re
+.PHONY: all clean fclean re run run_valgrind
 
 all: $(NAME)
 
-$(NAME): $(VECTOR_OBJS) $(GTEST_OBJS) $(OBJ) Makefile
-		$(CXX) $(CXXFLAGS) $(CPPFLAGS) -lpthread $(VECTOR_OBJS) $(GTEST_OBJS) $(OBJ) -o $(NAME)
+$(NAME): $(GTEST_OBJS) $(OBJ) Makefile
+		$(CXX) $(CXXFLAGS) $(CPPFLAGS) -lpthread $(GTEST_OBJS) $(OBJ) -o $(NAME)
+
+test:
+		$(CXX) --version
+
+run:
+		$(MAKE) re
+		./$(NAME) --gtest_brief=1
+
+run_valgrind:
+		$(MAKE) re
+		valgrind -q --log-file=output --leak-check=full --trace-children=yes ./$(NAME) --gtest_brief=1
 
 clean:
-		$(RM) $(NAME) $(GTEST_OBJS) $(VECTOR_OBJS) $(OBJ)
+		$(RM) $(NAME) $(OBJ)
+
+fclean: clean
+		$(RM) $(GTEST_OBJS)
 
 re: clean all

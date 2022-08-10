@@ -83,3 +83,4 @@ dkms.conf
 ### 42 ###
 # Executables
 unit_test
+output

@@ -3,14 +3,18 @@
 
 #include "gtest/gtest.h"
 
-class RandomSeedEnvironment : public ::testing::Environment {
-public:
-	void SetUp() override {
-		int _seed = ::testing::UnitTest::GetInstance()->random_seed();
-		std::srand(_seed);
-		std::cerr << "[ INFO     ] SEED: " << _seed << std::endl;
-	}
-};
+#include "vector_test.hpp"
+
+namespace {
+	class RandomSeedEnvironment : public ::testing::Environment {
+	public:
+		void SetUp() override {
+			int _seed = ::testing::UnitTest::GetInstance()->random_seed();
+			std::srand(_seed);
+			std::cout << "[ INFO     ] SEED: " << _seed << std::endl;
+		}
+	};
+}
 
 GTEST_API_ int main(int argc, char **argv) {
 	printf("Running main() from %s\n", __FILE__);
