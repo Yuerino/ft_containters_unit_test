@@ -9,11 +9,13 @@ namespace {
 		int num2 = rand() % TEST_SIZE;
 		decltype(this->ftvector) ftvector2(num1, num2);
 		decltype(this->stdvector) stdvector2(num1, num2);
+
 		typename decltype(this->ftvector)::iterator it1 = this->ftvector.begin();
 		typename decltype(this->ftvector)::iterator it2 = ftvector2.begin();
 
 		this->ftvector.swap(ftvector2);
 		this->stdvector.swap(stdvector2);
+
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 		EXPECT_THAT(ftvector2, ft::ContainerEq(stdvector2));
 		EXPECT_TRUE(it1 == ftvector2.begin());
@@ -27,11 +29,13 @@ namespace {
 		int num2 = rand() % TEST_SIZE;
 		decltype(this->ftvector) ftvector2(num1, num2);
 		decltype(this->stdvector) stdvector2(num1, num2);
+
 		typename decltype(this->ftvector)::iterator it1 = this->ftvector.begin();
 		typename decltype(this->ftvector)::iterator it2 = ftvector2.begin();
 
 		std::swap(this->ftvector, ftvector2);
 		std::swap(this->stdvector, stdvector2);
+
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 		EXPECT_THAT(ftvector2, ft::ContainerEq(stdvector2));
 		EXPECT_TRUE(it1 == ftvector2.begin());
@@ -48,11 +52,13 @@ namespace {
 		int num2 = rand() % TEST_SIZE;
 		decltype(this->ftvector) ftvector2(num1, num2);
 		decltype(this->stdvector) stdvector2(num1, num2);
+
 		typename decltype(this->ftvector)::iterator it1 = this->ftvector.begin();
 		typename decltype(this->ftvector)::iterator it2 = ftvector2.begin();
 
 		ft::swap(this->ftvector, ftvector2);
 		std::swap(this->stdvector, stdvector2);
+
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 		EXPECT_THAT(ftvector2, ft::ContainerEq(stdvector2));
 		EXPECT_TRUE(it1 == ftvector2.begin());
@@ -66,11 +72,13 @@ namespace {
 		int num2 = rand() % TEST_SIZE;
 		decltype(this->ftvector) ftvector2(num1, num2);
 		decltype(this->stdvector) stdvector2(num1, num2);
+
 		typename decltype(this->ftvector)::iterator it1 = this->ftvector.begin();
 		typename decltype(this->ftvector)::iterator it2 = ftvector2.begin();
 
 		this->ftvector.swap(ftvector2);
 		this->stdvector.swap(stdvector2);
+
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 		EXPECT_THAT(ftvector2, ft::ContainerEq(stdvector2));
 		EXPECT_TRUE(it1 == ftvector2.begin());
@@ -84,11 +92,13 @@ namespace {
 		int num2 = rand() % TEST_SIZE;
 		decltype(this->ftvector) ftvector2(num1, num2);
 		decltype(this->stdvector) stdvector2(num1, num2);
+
 		typename decltype(this->ftvector)::iterator it1 = this->ftvector.begin();
 		typename decltype(this->ftvector)::iterator it2 = ftvector2.begin();
 
 		std::swap(this->ftvector, ftvector2);
 		std::swap(this->stdvector, stdvector2);
+
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 		EXPECT_THAT(ftvector2, ft::ContainerEq(stdvector2));
 		EXPECT_TRUE(it1 == ftvector2.begin());
@@ -105,11 +115,13 @@ namespace {
 		int num2 = rand() % TEST_SIZE;
 		decltype(this->ftvector) ftvector2(num1, num2);
 		decltype(this->stdvector) stdvector2(num1, num2);
+
 		typename decltype(this->ftvector)::iterator it1 = this->ftvector.begin();
 		typename decltype(this->ftvector)::iterator it2 = ftvector2.begin();
 
 		ft::swap(this->ftvector, ftvector2);
 		std::swap(this->stdvector, stdvector2);
+		
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 		EXPECT_THAT(ftvector2, ft::ContainerEq(stdvector2));
 		EXPECT_TRUE(it1 == ftvector2.begin());

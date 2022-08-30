@@ -6,6 +6,7 @@ namespace {
 		this->ftvector.clear();
 		this->stdvector.clear();
 
+		EXPECT_EQ(this->ftvector.size(), 0);
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 	};
 
@@ -13,6 +14,7 @@ namespace {
 		this->ftvector.clear();
 		this->stdvector.clear();
 
+		EXPECT_EQ(this->ftvector.size(), 0);
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 	};
 }

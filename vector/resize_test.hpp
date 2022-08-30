@@ -16,6 +16,7 @@ namespace {
 
 		this->ftvector.resize(7);
 		this->stdvector.resize(7);
+
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 		// Reallocation shouldn't happen
 		EXPECT_EQ(this->ftvector.capacity(), old_capacity);
@@ -34,12 +35,12 @@ namespace {
 
 		// In this test we simply don't care if it throws or not because either
 		// way the vector should stay the same (strong guarantee)
+		typedef typename decltype(this->ftvector)::value_type value_type;
+		if (!std::is_same<value_type, DerivedInt>::value) return;
+
 		this->ftvector.assign(10, 42);
 		this->stdvector.assign(10, 42);
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
-
-		typedef typename decltype(this->ftvector)::value_type value_type;
-		if (!std::is_same<value_type, DerivedInt>::value) return;
 
 		g_vector_force_exception = ::ALL_EXCEPTION;
 		try {
@@ -47,6 +48,7 @@ namespace {
 			this->stdvector.resize(8);
 		} catch (...) { /* ignore */ }
 		g_vector_force_exception = ::NO_EXCEPTION;
+
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 	};
 
@@ -63,6 +65,7 @@ namespace {
 
 		this->ftvector.resize(17);
 		this->stdvector.resize(17);
+
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 		EXPECT_GT(this->ftvector.capacity(), old_capacity);
 		EXPECT_NE(it, this->ftvector.begin());
@@ -74,6 +77,9 @@ namespace {
 		// should be no changes in vector in case of exception (Strong
 		// guarantee)
 		// (We only test with type that is copyable or no-throw movable)
+		typedef typename decltype(this->ftvector)::value_type value_type;
+		if (!std::is_same<value_type, DerivedInt>::value) return;
+
 		this->ftvector.assign(10, 42);
 		this->stdvector.assign(10, 42);
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
@@ -84,15 +90,13 @@ namespace {
 		typename decltype(this->ftvector)::value_type old_capacity = this->ftvector.capacity();
 		typename decltype(this->ftvector)::value_type old_size = this->ftvector.size();
 
-		typedef typename decltype(this->ftvector)::value_type value_type;
-		if (!std::is_same<value_type, DerivedInt>::value) return;
-
 		g_vector_force_exception = ::ALL_EXCEPTION | ::THROW_ON_NBR;
 		::DerivedInt::to_throw = -2;
 		ASSERT_ANY_THROW(this->ftvector.resize(17));
 		::DerivedInt::to_throw = -2;
 		ASSERT_ANY_THROW(this->stdvector.resize(17));
 		g_vector_force_exception = ::NO_EXCEPTION;
+
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 		EXPECT_EQ(this->ftvector.capacity(), old_capacity);
 		EXPECT_EQ(this->ftvector.size(), old_size);
@@ -118,6 +122,7 @@ namespace {
 
 		this->ftvector.resize(17);
 		this->stdvector.resize(17);
+
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 		EXPECT_EQ(this->ftvector.capacity(), old_capacity);
 		for (it2 = this->ftvector.begin(); it != ite; ++it, ++it2)
@@ -127,6 +132,9 @@ namespace {
 	TYPED_TEST(VectorTest, ResizeExpandNoReallocationException) {
 		// In case of expands beyond size and no reallocation happen, vector
 		// should be in valid state and elements may change (Basic guarantee)
+		typedef typename decltype(this->ftvector)::value_type value_type;
+		if (!std::is_same<value_type, DerivedInt>::value) return;
+
 		this->ftvector.assign(10, 42);
 		this->ftvector.reserve(20);
 		this->stdvector.assign(10, 42);
@@ -138,15 +146,13 @@ namespace {
 		typename decltype(this->ftvector)::iterator it;
 		typename decltype(this->ftvector)::iterator ite;
 
-		typedef typename decltype(this->ftvector)::value_type value_type;
-		if (!std::is_same<value_type, DerivedInt>::value) return;
-
 		g_vector_force_exception = ::ALL_EXCEPTION | ::THROW_ON_NBR;
 		::DerivedInt::to_throw = -2;
 		ASSERT_ANY_THROW(this->ftvector.resize(17));
 		::DerivedInt::to_throw = -2;
 		ASSERT_ANY_THROW(this->stdvector.resize(17));
 		g_vector_force_exception = ::NO_EXCEPTION;
+
 		#ifdef TEST_EXACT
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 		#endif

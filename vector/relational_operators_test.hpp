@@ -16,6 +16,8 @@ namespace {
 		int num2 = rand() % TEST_SIZE;
 		decltype(this->ftvector) ftvector2(num1, num2);
 		decltype(this->stdvector) stdvector2(num1, num2);
+		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
+		EXPECT_THAT(ftvector2, ft::ContainerEq(stdvector2));
 
 		COMPARE(this->ftvector, ftvector2, this->stdvector, stdvector2);
 	};
@@ -25,11 +27,9 @@ namespace {
 		int num2 = rand() % TEST_SIZE;
 		decltype(this->ftvector) ftvector2(num1, num2);
 		decltype(this->stdvector) stdvector2(num1, num2);
+		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
+		EXPECT_THAT(ftvector2, ft::ContainerEq(stdvector2));
 
 		COMPARE(this->ftvector, ftvector2, this->stdvector, stdvector2);
-
-		decltype(this->ftvector) ftvector3;
-		decltype(this->stdvector) stdvector3;
-		COMPARE(this->ftvector, ftvector3, this->stdvector, stdvector3);
 	};
 }

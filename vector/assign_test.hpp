@@ -50,7 +50,6 @@ namespace {
 
 	TYPED_TEST(RandomizeVectorTest, AssignRandomIter) {
 		decltype(this->stdvector) stdvector2(rand() % TEST_SIZE, rand() % TEST_SIZE);
-		std::cout << "here1: " << this->ftvector.capacity() << " " << this->stdvector.capacity() << std::endl;
 		this->ftvector.assign(stdvector2.begin(), stdvector2.end());
 		this->stdvector.assign(stdvector2.begin(), stdvector2.end());
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
