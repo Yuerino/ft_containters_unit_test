@@ -10,7 +10,7 @@ USER_HEADERS	=	..
 
 TEST_HEADERS	=	./include
 
-CXX				=	g++-11
+CXX				=	g++
 
 CPPFLAGS		+=	-isystem $(GTEST_DIR)/include -isystem $(GMOCK_DIR)/include \
 					-isystem $(GTEST_DIR) -isystem $(GMOCK_DIR) \
