@@ -12,3 +12,4 @@
 #include "vector/relational_operators_test.hpp"
 #include "vector/erase_test.hpp"
 #include "vector/assign_test.hpp"
+#include "vector/insert_test.hpp"

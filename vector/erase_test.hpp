@@ -4,7 +4,7 @@
 namespace {
 	TYPED_TEST(RandomizeVectorTest, ErasePosition) {
 		// Invalidate all iterator from position iterator
-		int idx = rand() % TEST_SIZE;
+		int idx = rand() % (TEST_SIZE - 1);
 		typename decltype(this->ftvector)::iterator it = this->ftvector.begin();
 		typename decltype(this->ftvector)::iterator it2;
 		typename decltype(this->ftvector)::iterator ite;
@@ -20,15 +20,12 @@ namespace {
 			EXPECT_EQ(it, it2);
 	};
 
-	TYPED_TEST(RandomizeVectorTest, ErasePositionExcepetion) {
+	TEST_F(RandomizeVectorExceptionTest, ErasePositionExcepetion) {
 		// Basic guarantee if position is not the last element
-		typedef typename decltype(this->ftvector)::value_type value_type;
-		if (!std::is_same<value_type, DerivedInt>::value) return;
-
 		typename decltype(this->ftvector)::iterator it;
 		typename decltype(this->ftvector)::iterator ite;
 
-		int idx = rand() % (TEST_SIZE - 2) + 2;
+		int idx = rand() % (TEST_SIZE - 3) + 2;
 		g_vector_force_exception = ::ALL_EXCEPTION | ::THROW_ON_NBR;
 		::DerivedInt::to_throw = -2;
 		ASSERT_ANY_THROW(this->ftvector.erase(this->ftvector.begin() + idx));
@@ -40,14 +37,11 @@ namespace {
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 		#endif
 		EXPECT_GE(this->ftvector.capacity(), this->ftvector.size());
-		for (it = this->ftvector.begin(), ite = this->ftvector.end(); it != ite; ++it) /* ignore */ ;
+		for (it = this->ftvector.begin(), ite = this->ftvector.end(); it != ite; ++it) ++(*it).nbr;
 	};
 
-	TYPED_TEST(RandomizeVectorTest, ErasePositionLastExcepetion) {
+	TEST_F(RandomizeVectorExceptionTest, ErasePositionLastExcepetion) {
 		// Nothrow guarantee in case in case position is last element
-		typedef typename decltype(this->ftvector)::value_type value_type;
-		if (!std::is_same<value_type, DerivedInt>::value) return;
-
 		typename decltype(this->ftvector)::iterator it = this->ftvector.begin();
 		typename decltype(this->ftvector)::iterator it2;
 		typename decltype(this->ftvector)::iterator ite;
@@ -112,11 +106,8 @@ namespace {
 			EXPECT_EQ(it, it2);
 	};
 
-	TYPED_TEST(RandomizeVectorTest, EraseRangeExcepetion) {
+	TEST_F(RandomizeVectorExceptionTest, EraseRangeExcepetion) {
 		// Basic guarantee if last is not the end iterator
-		typedef typename decltype(this->ftvector)::value_type value_type;
-		if (!std::is_same<value_type, DerivedInt>::value) return;
-
 		typename decltype(this->ftvector)::iterator it;
 		typename decltype(this->ftvector)::iterator ite;
 
@@ -131,14 +122,11 @@ namespace {
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 		#endif
 		EXPECT_GE(this->ftvector.capacity(), this->ftvector.size());
-		for (it = this->ftvector.begin(), ite = this->ftvector.end(); it != ite; ++it) /* ignore */ ;
+		for (it = this->ftvector.begin(), ite = this->ftvector.end(); it != ite; ++it) ++(*it).nbr;
 	};
 
-	TYPED_TEST(RandomizeVectorTest, EraseRangeLastExcepetion) {
+	TEST_F(RandomizeVectorExceptionTest, EraseRangeLastExcepetion) {
 		// Nothrow guarantee in case in case last is end iterator
-		typedef typename decltype(this->ftvector)::value_type value_type;
-		if (!std::is_same<value_type, DerivedInt>::value) return;
-
 		typename decltype(this->ftvector)::iterator it = this->ftvector.begin();
 		typename decltype(this->ftvector)::iterator it2;
 		typename decltype(this->ftvector)::iterator ite;

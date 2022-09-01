@@ -13,7 +13,7 @@ namespace {
 		typename decltype(this->ftvector)::iterator it = this->ftvector.begin();
 		typename decltype(this->ftvector)::iterator it2;
 		typename decltype(this->ftvector)::iterator ite = this->ftvector.end();
-		typename decltype(this->ftvector)::value_type old_capacity = this->ftvector.capacity();
+		typename decltype(this->ftvector)::size_type old_capacity = this->ftvector.capacity();
 
 		this->ftvector.push_back(69);
 		this->stdvector.push_back(69);
@@ -25,11 +25,8 @@ namespace {
 			EXPECT_EQ(it, it2);
 	};
 
-	TYPED_TEST(VectorTest, PushBackNoAllocationException) {
+	TEST_F(VectorExceptionTest, PushBackNoAllocationException) {
 		// In case of no reallocation, strong guarantee
-		typedef typename decltype(this->ftvector)::value_type value_type;
-		if (!std::is_same<value_type, DerivedInt>::value) return;
-
 		this->ftvector.assign(10, 42);
 		this->ftvector.reserve(100);
 		this->stdvector.assign(10, 42);
@@ -39,8 +36,8 @@ namespace {
 		typename decltype(this->ftvector)::iterator it = this->ftvector.begin();
 		typename decltype(this->ftvector)::iterator it2;
 		typename decltype(this->ftvector)::iterator ite;
-		typename decltype(this->ftvector)::value_type old_capacity = this->ftvector.capacity();
-		typename decltype(this->ftvector)::value_type old_size = this->ftvector.size();
+		typename decltype(this->ftvector)::size_type old_capacity = this->ftvector.capacity();
+		typename decltype(this->ftvector)::size_type old_size = this->ftvector.size();
 
 		g_vector_force_exception = ::ALL_EXCEPTION | ::THROW_ON_NBR;
 		::DerivedInt::to_throw = 0;
@@ -75,11 +72,8 @@ namespace {
 		EXPECT_NE(ite, this->ftvector.end());
 	};
 
-	TYPED_TEST(VectorTest, PushBackAllocationException) {
+	TEST_F(VectorExceptionTest, PushBackAllocationException) {
 		// In case of reallocation, basic guarantee
-		typedef typename decltype(this->ftvector)::value_type value_type;
-		if (!std::is_same<value_type, DerivedInt>::value) return;
-
 		this->ftvector.assign(10, 42);
 		this->stdvector.assign(10, 42);
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
@@ -98,7 +92,7 @@ namespace {
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 		#endif
 		EXPECT_GE(this->ftvector.capacity(), this->ftvector.size());
-		for (it = this->ftvector.begin(), ite = this->ftvector.end(); it != ite; ++it) /* ignore */ ;
+		for (it = this->ftvector.begin(), ite = this->ftvector.end(); it != ite; ++it) ++(*it).nbr;
 	};
 
 	TYPED_TEST(RandomizeVectorTest, PushBack) {

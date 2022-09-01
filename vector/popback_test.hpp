@@ -8,7 +8,7 @@ namespace {
 		typename decltype(this->ftvector)::iterator it = this->ftvector.begin();
 		typename decltype(this->ftvector)::iterator it2;
 		typename decltype(this->ftvector)::iterator ite = this->ftvector.end();
-		typename decltype(this->ftvector)::value_type old_capacity = this->ftvector.capacity();
+		typename decltype(this->ftvector)::size_type old_capacity = this->ftvector.capacity();
 
 		this->ftvector.pop_back();
 		this->stdvector.pop_back();

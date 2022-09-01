@@ -53,11 +53,8 @@ namespace {
 		EXPECT_NE(ite, this->ftvector.end());
 	};
 
-	TYPED_TEST(VectorTest, ReserveReallocationException) {
+	TEST_F(VectorExceptionTest, ReserveReallocationException) {
 		// Basic guarantee in case of reallocation
-		typedef typename decltype(this->ftvector)::value_type value_type;
-		if (!std::is_same<value_type, DerivedInt>::value) return;
-
 		this->ftvector.assign(10, 42);
 		this->stdvector.assign(10, 42);
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
@@ -79,7 +76,7 @@ namespace {
 		// Check if vector is valid
 		EXPECT_GE(this->ftvector.capacity(), this->ftvector.size());
 		// Should not SEGFAULT or throw exception
-		for (it = this->ftvector.begin(), ite = this->ftvector.end(); it != ite; ++it) /* ignore */ ;
+		for (it = this->ftvector.begin(), ite = this->ftvector.end(); it != ite; ++it) ++(*it).nbr;
 	};
 
 	TYPED_TEST(VectorTest, ReserveNoReallocation) {
@@ -103,11 +100,8 @@ namespace {
 			EXPECT_EQ(it, it2);
 	};
 
-	TYPED_TEST(VectorTest, ReserveNoReallocationException) {
+	TEST_F(VectorExceptionTest, ReserveNoReallocationException) {
 		// Strong guarantee in case of no reallocation
-		typedef typename decltype(this->ftvector)::value_type value_type;
-		if (!std::is_same<value_type, DerivedInt>::value) return;
-
 		this->ftvector.assign(10, 42);
 		this->stdvector.assign(10, 42);
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
@@ -115,8 +109,8 @@ namespace {
 		typename decltype(this->ftvector)::iterator it = this->ftvector.begin();
 		typename decltype(this->ftvector)::iterator it2;
 		typename decltype(this->ftvector)::iterator ite;
-		typename decltype(this->ftvector)::value_type old_capacity = this->ftvector.capacity();
-		typename decltype(this->ftvector)::value_type old_size = this->ftvector.size();
+		typename decltype(this->ftvector)::size_type old_capacity = this->ftvector.capacity();
+		typename decltype(this->ftvector)::size_type old_size = this->ftvector.size();
 
 		typename decltype(this->ftvector)::size_type size = this->ftvector.capacity() - 1;
 		g_vector_force_exception = ::ALL_EXCEPTION | ::THROW_ON_NBR;

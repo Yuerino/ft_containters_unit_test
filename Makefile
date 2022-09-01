@@ -21,15 +21,12 @@ CXXFLAGS		+=	-g -Wall -Wextra -Werror -pthread -std=c++17 -DTEST_EXACT -D VECTOR
 SRC				=	main.cpp
 OBJ				=	$(SRC:.cpp=.o)
 
-.PHONY: all clean fclean re run run_valgrind
+.PHONY: all clean fclean re run run_valgrind test
 
 all: $(NAME)
 
 $(NAME): $(GTEST_OBJS) $(OBJ) Makefile
 		$(CXX) $(CXXFLAGS) $(CPPFLAGS) -lpthread $(GTEST_OBJS) $(OBJ) -o $(NAME)
-
-test:
-		$(CXX) --version
 
 run:
 		$(MAKE) re

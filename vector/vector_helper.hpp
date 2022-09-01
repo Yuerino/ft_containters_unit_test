@@ -200,6 +200,9 @@ namespace {
 		}
 	};
 
+	class VectorExceptionTest : public VectorTest<DerivedInt> {};
+	class RandomizeVectorExceptionTest : public RandomizeVectorTest<DerivedInt> {};
+
 	TYPED_TEST_SUITE(VectorTest, TestTypes);
 	TYPED_TEST_SUITE(RandomizeVectorTest, TestTypes);
 }
