@@ -81,12 +81,10 @@ namespace {
 
 		DerivedInt() : nbr(-1), leak(0) {
 			if ((g_vector_force_exception & ::DEFAULT_CTOR_EXCEPTION) != 0) {
-				if ((g_vector_force_exception & ::THROW_ON_NBR) != 0 && ::DerivedInt::to_throw >= 0) {
+				if ((g_vector_force_exception & ::THROW_ON_NBR) != 0 && ::DerivedInt::to_throw >= 0)
 					throw "42";
-				}
-				else if ((g_vector_force_exception & ::THROW_ON_NBR) == 0) {
+				else if ((g_vector_force_exception & ::THROW_ON_NBR) == 0)
 					throw "42";
-				}
 			}
 			this->leak = new int(69);
 			::DerivedInt::to_throw++;
