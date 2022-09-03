@@ -169,7 +169,7 @@ namespace {
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 		ASSERT_LT(this->ftvector.capacity(), 10);
 
-		decltype(this->stdvector) stdvector2(rand() % TEST_SIZE, rand() % TEST_SIZE);
+		decltype(this->stdvector) stdvector2((rand() % TEST_SIZE) + 11, rand() % TEST_SIZE);
 		typename decltype(this->ftvector)::value_type old_num1 = this->ftvector.front();
 		typename decltype(this->ftvector)::value_type old_num2 = this->ftvector.back();
 		typename decltype(this->ftvector)::iterator ite = this->ftvector.end();
@@ -192,7 +192,7 @@ namespace {
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 		ASSERT_LT(this->ftvector.capacity(), 10);
 
-		decltype(this->stdvector) stdvector2(rand() % TEST_SIZE, rand() % TEST_SIZE);
+		decltype(this->stdvector) stdvector2((rand() % TEST_SIZE) + 11, rand() % TEST_SIZE);
 		typename decltype(this->ftvector)::iterator it;
 		typename decltype(this->ftvector)::iterator ite;
 
@@ -341,7 +341,7 @@ namespace {
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 		ASSERT_LT(this->ftvector.capacity(), 10);
 
-		std::list<typename decltype(this->stdvector)::value_type> stdlist(rand() % TEST_SIZE, rand() % TEST_SIZE);
+		std::list<typename decltype(this->stdvector)::value_type> stdlist((rand() % TEST_SIZE) + 11, rand() % TEST_SIZE);
 		typename decltype(this->ftvector)::value_type old_num1 = this->ftvector.front();
 		typename decltype(this->ftvector)::value_type old_num2 = this->ftvector.back();
 		typename decltype(this->ftvector)::iterator ite = this->ftvector.end();
@@ -364,7 +364,7 @@ namespace {
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 		ASSERT_LT(this->ftvector.capacity(), 10);
 
-		std::list<typename decltype(this->stdvector)::value_type> stdlist(rand() % TEST_SIZE, rand() % TEST_SIZE);
+		std::list<typename decltype(this->stdvector)::value_type> stdlist((rand() % TEST_SIZE) + 11, rand() % TEST_SIZE);
 		typename decltype(this->ftvector)::iterator it;
 		typename decltype(this->ftvector)::iterator ite;
 
