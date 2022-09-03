@@ -82,9 +82,9 @@ namespace {
 		DerivedInt() : nbr(-1), leak(0) {
 			if ((g_vector_force_exception & ::DEFAULT_CTOR_EXCEPTION) != 0) {
 				if ((g_vector_force_exception & ::THROW_ON_NBR) != 0 && ::DerivedInt::to_throw >= 0)
-					throw "42";
+					throw std::logic_error("Forced exception");
 				else if ((g_vector_force_exception & ::THROW_ON_NBR) == 0)
-					throw "42";
+					throw std::logic_error("Forced exception");
 			}
 			this->leak = new int(69);
 			::DerivedInt::to_throw++;
@@ -92,9 +92,9 @@ namespace {
 		DerivedInt(const int& val) : nbr(val), leak(0) {
 			if ((g_vector_force_exception & ::INT_CTOR_EXCEPTION) != 0) {
 				if ((g_vector_force_exception & ::THROW_ON_NBR) != 0 && ::DerivedInt::to_throw >= 0)
-					throw "42";
+					throw std::logic_error("Forced exception");
 				else if ((g_vector_force_exception & ::THROW_ON_NBR) == 0)
-					throw "42";
+					throw std::logic_error("Forced exception");
 			}
 			this->leak = new int(69);
 			::DerivedInt::to_throw++;
@@ -102,9 +102,9 @@ namespace {
 		DerivedInt(const DerivedInt& copy) : nbr(copy.nbr), leak(0) {
 			if ((g_vector_force_exception & ::COPY_CTOR_EXCEPTION) != 0) {
 				if ((g_vector_force_exception & ::THROW_ON_NBR) != 0 && ::DerivedInt::to_throw >= 0)
-					throw "42";
+					throw std::logic_error("Forced exception");
 				else if ((g_vector_force_exception & ::THROW_ON_NBR) == 0)
-					throw "42";
+					throw std::logic_error("Forced exception");
 			}
 			this->leak = new int(69);
 			::DerivedInt::to_throw++;
@@ -112,9 +112,9 @@ namespace {
 		DerivedInt& operator=(const DerivedInt& other) {
 			if ((g_vector_force_exception & ::COPY_ASSIGN_EXCEPTION) != 0) {
 				if ((g_vector_force_exception & ::THROW_ON_NBR) != 0 && ::DerivedInt::to_throw >= 0)
-					throw "42";
+					throw std::logic_error("Forced exception");
 				else if ((g_vector_force_exception & ::THROW_ON_NBR) == 0)
-					throw "42";
+					throw std::logic_error("Forced exception");
 			}
 			::DerivedInt::to_throw++;
 			if (&other == this) return *this;
