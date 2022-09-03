@@ -8,8 +8,8 @@ namespace {
 		typename decltype(this->ftvector)::value_type old_num2 = this->ftvector.back();
 		typename decltype(this->ftvector)::iterator ite = this->ftvector.end();
 
-		this->ftvector.assign(10, 42);
-		this->stdvector.assign(10, 42);
+		this->ftvector.assign(10, -42);
+		this->stdvector.assign(10, -42);
 
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 		EXPECT_TRUE(old_num1 != this->ftvector.front());
@@ -49,8 +49,8 @@ namespace {
 		typename decltype(this->ftvector)::value_type old_num2 = this->ftvector.back();
 		typename decltype(this->ftvector)::iterator ite = this->ftvector.end();
 
-		this->ftvector.assign(10, 42);
-		this->stdvector.assign(10, 42);
+		this->ftvector.assign(10, -42);
+		this->stdvector.assign(10, -42);
 
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 		EXPECT_TRUE(old_num1 != this->ftvector.front());

@@ -4,9 +4,9 @@
 namespace {
 	TYPED_TEST(VectorTest, InsertSingleNoReallocation) {
 		// In case of no reallocation, invalidate all iterators from position iterator
-		this->ftvector.assign(10, 42);
+		this->ftvector.assign(10, -42);
 		this->ftvector.reserve(20);
-		this->stdvector.assign(10, 42);
+		this->stdvector.assign(10, -42);
 		this->stdvector.reserve(20);
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 
@@ -29,9 +29,9 @@ namespace {
 
 	TEST_F(VectorExceptionTest, InsertSingleNoReallocationException) {
 		// Basic guarantee in case of no reallocation and position is not end iterator
-		this->ftvector.assign(10, 42);
+		this->ftvector.assign(10, -42);
 		this->ftvector.reserve(20);
-		this->stdvector.assign(10, 42);
+		this->stdvector.assign(10, -42);
 		this->stdvector.reserve(20);
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 
@@ -56,9 +56,9 @@ namespace {
 	TEST_F(VectorExceptionTest, InsertSingleNoReallocationLastException) {
 		// Strong guarantee in case of no reallocation, inserting single element
 		// and position is the end iterator
-		this->ftvector.assign(10, 42);
+		this->ftvector.assign(10, -42);
 		this->ftvector.reserve(20);
-		this->stdvector.assign(10, 42);
+		this->stdvector.assign(10, -42);
 		this->stdvector.reserve(20);
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 
@@ -84,8 +84,8 @@ namespace {
 
 	TYPED_TEST(VectorTest, InsertSingleReallocation) {
 		// In case of reallocation, invalidate all iterators
-		this->ftvector.assign(10, 42);
-		this->stdvector.assign(10, 42);
+		this->ftvector.assign(10, -42);
+		this->stdvector.assign(10, -42);
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 		// Ensure next insert will reallocate
 		EXPECT_EQ(this->ftvector.size(), this->ftvector.capacity());
@@ -109,8 +109,8 @@ namespace {
 
 	TEST_F(VectorExceptionTest, InsertSingleReallocationException) {
 		// Strong guarantee in case of reallocation
-		this->ftvector.assign(10, 42);
-		this->stdvector.assign(10, 42);
+		this->ftvector.assign(10, -42);
+		this->stdvector.assign(10, -42);
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 		// Ensure next insert will reallocate
 		EXPECT_EQ(this->ftvector.size(), this->ftvector.capacity());
@@ -151,9 +151,9 @@ namespace {
 
 	TYPED_TEST(VectorTest, InsertFillNoReallocation) {
 		// In case of no reallocation, invalidate all iterators from position iterator
-		this->ftvector.assign(10, 42);
+		this->ftvector.assign(10, -42);
 		this->ftvector.reserve(50);
-		this->stdvector.assign(10, 42);
+		this->stdvector.assign(10, -42);
 		this->stdvector.reserve(50);
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 
@@ -176,9 +176,9 @@ namespace {
 
 	TEST_F(VectorExceptionTest, InsertFillNoReallocationException) {
 		// Basic guarantee in case of no reallocation and position is not end iterator
-		this->ftvector.assign(10, 42);
+		this->ftvector.assign(10, -42);
 		this->ftvector.reserve(50);
-		this->stdvector.assign(10, 42);
+		this->stdvector.assign(10, -42);
 		this->stdvector.reserve(50);
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 
@@ -203,9 +203,9 @@ namespace {
 	TEST_F(VectorExceptionTest, InsertFillNoReallocationLastException) {
 		// Strong guarantee in case of no reallocation, inserting single element
 		// and position is the end iterator
-		this->ftvector.assign(10, 42);
+		this->ftvector.assign(10, -42);
 		this->ftvector.reserve(50);
-		this->stdvector.assign(10, 42);
+		this->stdvector.assign(10, -42);
 		this->stdvector.reserve(50);
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 
@@ -231,8 +231,8 @@ namespace {
 
 	TYPED_TEST(VectorTest, InsertFillReallocation) {
 		// In case of reallocation, invalidate all iterators
-		this->ftvector.assign(10, 42);
-		this->stdvector.assign(10, 42);
+		this->ftvector.assign(10, -42);
+		this->stdvector.assign(10, -42);
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 		// Ensure next insert will reallocate
 		EXPECT_EQ(this->ftvector.size(), this->ftvector.capacity());
@@ -253,8 +253,8 @@ namespace {
 
 	TEST_F(VectorExceptionTest, InsertFillReallocationException) {
 		// Strong guarantee in case of reallocation
-		this->ftvector.assign(10, 42);
-		this->stdvector.assign(10, 42);
+		this->ftvector.assign(10, -42);
+		this->stdvector.assign(10, -42);
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 		// Ensure next insert will reallocate
 		EXPECT_EQ(this->ftvector.size(), this->ftvector.capacity());
@@ -292,9 +292,9 @@ namespace {
 
 	TYPED_TEST(VectorTest, InsertRangeRandomIterNoReallocation) {
 		// In case of no reallocation, invalidate all iterators from position iterator
-		this->ftvector.assign(10, 42);
+		this->ftvector.assign(10, -42);
 		this->ftvector.reserve(50);
-		this->stdvector.assign(10, 42);
+		this->stdvector.assign(10, -42);
 		this->stdvector.reserve(50);
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 
@@ -318,9 +318,9 @@ namespace {
 
 	TEST_F(VectorExceptionTest, InsertRangeRandomIterNoReallocationException) {
 		// Basic guarantee in case of no reallocation and position is not end iterator
-		this->ftvector.assign(10, 42);
+		this->ftvector.assign(10, -42);
 		this->ftvector.reserve(50);
-		this->stdvector.assign(10, 42);
+		this->stdvector.assign(10, -42);
 		this->stdvector.reserve(50);
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 
@@ -346,9 +346,9 @@ namespace {
 	TEST_F(VectorExceptionTest, InsertRangeRandomIterNoReallocationLastException) {
 		// Strong guarantee in case of no reallocation, inserting single element
 		// and position is the end iterator
-		this->ftvector.assign(10, 42);
+		this->ftvector.assign(10, -42);
 		this->ftvector.reserve(50);
-		this->stdvector.assign(10, 42);
+		this->stdvector.assign(10, -42);
 		this->stdvector.reserve(50);
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 
@@ -375,8 +375,8 @@ namespace {
 
 	TYPED_TEST(VectorTest, InsertRangeRandomIterReallocation) {
 		// In case of reallocation, invalidate all iterators
-		this->ftvector.assign(10, 42);
-		this->stdvector.assign(10, 42);
+		this->ftvector.assign(10, -42);
+		this->stdvector.assign(10, -42);
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 		// Ensure next insert will reallocate
 		EXPECT_EQ(this->ftvector.size(), this->ftvector.capacity());
@@ -398,8 +398,8 @@ namespace {
 
 	TEST_F(VectorExceptionTest, InsertRangeRandomIterReallocationException) {
 		// Strong guarantee in case of reallocation
-		this->ftvector.assign(10, 42);
-		this->stdvector.assign(10, 42);
+		this->ftvector.assign(10, -42);
+		this->stdvector.assign(10, -42);
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 		// Ensure next insert will reallocate
 		EXPECT_EQ(this->ftvector.size(), this->ftvector.capacity());
@@ -439,9 +439,9 @@ namespace {
 
 	TYPED_TEST(VectorTest, InsertRangeFromArrayNoReallocation) {
 		// In case of no reallocation, invalidate all iterators from position iterator
-		this->ftvector.assign(10, 42);
+		this->ftvector.assign(10, -42);
 		this->ftvector.reserve(50);
-		this->stdvector.assign(10, 42);
+		this->stdvector.assign(10, -42);
 		this->stdvector.reserve(50);
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 
@@ -465,9 +465,9 @@ namespace {
 
 	TEST_F(VectorExceptionTest, InsertRangeFromArrayNoReallocationException) {
 		// Basic guarantee in case of no reallocation and position is not end iterator
-		this->ftvector.assign(10, 42);
+		this->ftvector.assign(10, -42);
 		this->ftvector.reserve(50);
-		this->stdvector.assign(10, 42);
+		this->stdvector.assign(10, -42);
 		this->stdvector.reserve(50);
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 
@@ -493,9 +493,9 @@ namespace {
 	TEST_F(VectorExceptionTest, InsertRangeFromArrayNoReallocationLastException) {
 		// Strong guarantee in case of no reallocation, inserting single element
 		// and position is the end iterator
-		this->ftvector.assign(10, 42);
+		this->ftvector.assign(10, -42);
 		this->ftvector.reserve(50);
-		this->stdvector.assign(10, 42);
+		this->stdvector.assign(10, -42);
 		this->stdvector.reserve(50);
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 
@@ -522,8 +522,8 @@ namespace {
 
 	TYPED_TEST(VectorTest, InsertRangeFromArrayReallocation) {
 		// In case of reallocation, invalidate all iterators
-		this->ftvector.assign(10, 42);
-		this->stdvector.assign(10, 42);
+		this->ftvector.assign(10, -42);
+		this->stdvector.assign(10, -42);
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 		// Ensure next insert will reallocate
 		EXPECT_EQ(this->ftvector.size(), this->ftvector.capacity());
@@ -545,8 +545,8 @@ namespace {
 
 	TEST_F(VectorExceptionTest, InsertRangeFromArrayReallocationException) {
 		// Strong guarantee in case of reallocation
-		this->ftvector.assign(10, 42);
-		this->stdvector.assign(10, 42);
+		this->ftvector.assign(10, -42);
+		this->stdvector.assign(10, -42);
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 		// Ensure next insert will reallocate
 		EXPECT_EQ(this->ftvector.size(), this->ftvector.capacity());
@@ -586,9 +586,9 @@ namespace {
 
 	TYPED_TEST(VectorTest, InsertRangeBiDirIterNoReallocation) {
 		// In case of no reallocation, invalidate all iterators from position iterator
-		this->ftvector.assign(10, 42);
+		this->ftvector.assign(10, -42);
 		this->ftvector.reserve(50);
-		this->stdvector.assign(10, 42);
+		this->stdvector.assign(10, -42);
 		this->stdvector.reserve(50);
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 
@@ -612,9 +612,9 @@ namespace {
 
 	TEST_F(VectorExceptionTest, InsertRangeBiDirIterNoReallocationException) {
 		// Basic guarantee in case of no reallocation and position is not end iterator
-		this->ftvector.assign(10, 42);
+		this->ftvector.assign(10, -42);
 		this->ftvector.reserve(50);
-		this->stdvector.assign(10, 42);
+		this->stdvector.assign(10, -42);
 		this->stdvector.reserve(50);
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 
@@ -640,9 +640,9 @@ namespace {
 	TEST_F(VectorExceptionTest, InsertRangeBiDirIterNoReallocationLastException) {
 		// Strong guarantee in case of no reallocation, inserting single element
 		// and position is the end iterator
-		this->ftvector.assign(10, 42);
+		this->ftvector.assign(10, -42);
 		this->ftvector.reserve(50);
-		this->stdvector.assign(10, 42);
+		this->stdvector.assign(10, -42);
 		this->stdvector.reserve(50);
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 
@@ -669,8 +669,8 @@ namespace {
 
 	TYPED_TEST(VectorTest, InsertRangeBiDirIterReallocation) {
 		// In case of reallocation, invalidate all iterators
-		this->ftvector.assign(10, 42);
-		this->stdvector.assign(10, 42);
+		this->ftvector.assign(10, -42);
+		this->stdvector.assign(10, -42);
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 		// Ensure next insert will reallocate
 		EXPECT_EQ(this->ftvector.size(), this->ftvector.capacity());
@@ -692,8 +692,8 @@ namespace {
 
 	TEST_F(VectorExceptionTest, InsertRangeBiDirIterReallocationException) {
 		// Strong guarantee in case of reallocation
-		this->ftvector.assign(10, 42);
-		this->stdvector.assign(10, 42);
+		this->ftvector.assign(10, -42);
+		this->stdvector.assign(10, -42);
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 		// Ensure next insert will reallocate
 		EXPECT_EQ(this->ftvector.size(), this->ftvector.capacity());
@@ -733,9 +733,9 @@ namespace {
 
 	TYPED_TEST(VectorTest, InsertRangeInputIterNoReallocation) {
 		// In case of no reallocation, invalidate all iterators from position iterator
-		this->ftvector.assign(10, 42);
+		this->ftvector.assign(10, -42);
 		this->ftvector.reserve(50);
-		this->stdvector.assign(10, 42);
+		this->stdvector.assign(10, -42);
 		this->stdvector.reserve(50);
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 
@@ -763,9 +763,9 @@ namespace {
 
 	TEST_F(VectorExceptionTest, InsertRangeInputIterNoReallocationException) {
 		// Basic guarantee in case of no reallocation and position is not end iterator
-		this->ftvector.assign(10, 42);
+		this->ftvector.assign(10, -42);
 		this->ftvector.reserve(50);
-		this->stdvector.assign(10, 42);
+		this->stdvector.assign(10, -42);
 		this->stdvector.reserve(50);
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 
@@ -795,9 +795,9 @@ namespace {
 	TEST_F(VectorExceptionTest, InsertRangeInputIterNoReallocationLastException) {
 		// Strong guarantee in case of no reallocation, inserting single element
 		// and position is the end iterator
-		this->ftvector.assign(10, 42);
+		this->ftvector.assign(10, -42);
 		this->ftvector.reserve(50);
-		this->stdvector.assign(10, 42);
+		this->stdvector.assign(10, -42);
 		this->stdvector.reserve(50);
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 
@@ -828,8 +828,8 @@ namespace {
 
 	TYPED_TEST(VectorTest, InsertRangeInputIterReallocation) {
 		// In case of reallocation, invalidate all iterators
-		this->ftvector.assign(10, 42);
-		this->stdvector.assign(10, 42);
+		this->ftvector.assign(10, -42);
+		this->stdvector.assign(10, -42);
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 		// Ensure next insert will reallocate
 		EXPECT_EQ(this->ftvector.size(), this->ftvector.capacity());
@@ -855,8 +855,8 @@ namespace {
 
 	TEST_F(VectorExceptionTest, InsertRangeInputIterReallocationException) {
 		// Strong guarantee in case of reallocation
-		this->ftvector.assign(10, 42);
-		this->stdvector.assign(10, 42);
+		this->ftvector.assign(10, -42);
+		this->stdvector.assign(10, -42);
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 		// Ensure next insert will reallocate
 		EXPECT_EQ(this->ftvector.size(), this->ftvector.capacity());

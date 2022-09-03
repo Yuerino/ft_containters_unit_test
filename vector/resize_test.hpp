@@ -5,8 +5,8 @@ namespace {
 	TYPED_TEST(VectorTest, ResizeShrink) {
 		// In case of shrink should not realloc (capacity stays same) and only
 		// invalidate iterators beyond new size
-		this->ftvector.assign(10, 42);
-		this->stdvector.assign(10, 42);
+		this->ftvector.assign(10, -42);
+		this->stdvector.assign(10, -42);
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 
 		typename decltype(this->ftvector)::iterator it = this->ftvector.begin();
@@ -35,8 +35,8 @@ namespace {
 
 		// In this test we simply don't care if it throws or not because either
 		// way the vector should stay the same (strong guarantee)
-		this->ftvector.assign(10, 42);
-		this->stdvector.assign(10, 42);
+		this->ftvector.assign(10, -42);
+		this->stdvector.assign(10, -42);
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 
 		g_vector_force_exception = ::ALL_EXCEPTION;
@@ -52,8 +52,8 @@ namespace {
 	TYPED_TEST(VectorTest, ResizeExpandReallocation) {
 		// In case of expands beyond capacity and reallocation happen then all
 		// iterators should be invalidated
-		this->ftvector.assign(10, 42);
-		this->stdvector.assign(10, 42);
+		this->ftvector.assign(10, -42);
+		this->stdvector.assign(10, -42);
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 
 		typename decltype(this->ftvector)::iterator it = this->ftvector.begin();
@@ -74,8 +74,8 @@ namespace {
 		// should be no changes in vector in case of exception (Strong
 		// guarantee)
 		// (We only test with type that is copyable or no-throw movable)
-		this->ftvector.assign(10, 42);
-		this->stdvector.assign(10, 42);
+		this->ftvector.assign(10, -42);
+		this->stdvector.assign(10, -42);
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 
 		typename decltype(this->ftvector)::iterator it = this->ftvector.begin();
@@ -101,9 +101,9 @@ namespace {
 	TYPED_TEST(VectorTest, ResizeExpandNoReallocation) {
 		// In case of expands beyond size and no reallocation happen then no
 		// iterators should be invalidated
-		this->ftvector.assign(10, 42);
+		this->ftvector.assign(10, -42);
 		this->ftvector.reserve(20);
-		this->stdvector.assign(10, 42);
+		this->stdvector.assign(10, -42);
 		this->stdvector.reserve(20);
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 		ASSERT_GE(this->ftvector.capacity(), 20);
@@ -126,9 +126,9 @@ namespace {
 	TEST_F(VectorExceptionTest, ResizeExpandNoReallocationException) {
 		// In case of expands beyond size and no reallocation happen, vector
 		// should be in valid state and elements may change (Basic guarantee)
-		this->ftvector.assign(10, 42);
+		this->ftvector.assign(10, -42);
 		this->ftvector.reserve(20);
-		this->stdvector.assign(10, 42);
+		this->stdvector.assign(10, -42);
 		this->stdvector.reserve(20);
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 		ASSERT_GE(this->ftvector.capacity(), 20);

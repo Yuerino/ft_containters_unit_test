@@ -36,8 +36,8 @@ namespace {
 
 	TYPED_TEST(VectorTest, ReserveReallocation) {
 		// In case of reallocation, invalidate all iterators
-		this->ftvector.assign(10, 42);
-		this->stdvector.assign(10, 42);
+		this->ftvector.assign(10, -42);
+		this->stdvector.assign(10, -42);
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 
 		typename decltype(this->ftvector)::iterator it = this->ftvector.begin();
@@ -55,8 +55,8 @@ namespace {
 
 	TEST_F(VectorExceptionTest, ReserveReallocationException) {
 		// Basic guarantee in case of reallocation
-		this->ftvector.assign(10, 42);
-		this->stdvector.assign(10, 42);
+		this->ftvector.assign(10, -42);
+		this->stdvector.assign(10, -42);
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 
 		typename decltype(this->ftvector)::iterator it;
@@ -82,8 +82,8 @@ namespace {
 	TYPED_TEST(VectorTest, ReserveNoReallocation) {
 		// In case of no reallocation, this function shoudln't do anything, all
 		// iterators should be valid
-		this->ftvector.assign(10, 42);
-		this->stdvector.assign(10, 42);
+		this->ftvector.assign(10, -42);
+		this->stdvector.assign(10, -42);
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 
 		typename decltype(this->ftvector)::iterator it = this->ftvector.begin();
@@ -102,8 +102,8 @@ namespace {
 
 	TEST_F(VectorExceptionTest, ReserveNoReallocationException) {
 		// Strong guarantee in case of no reallocation
-		this->ftvector.assign(10, 42);
-		this->stdvector.assign(10, 42);
+		this->ftvector.assign(10, -42);
+		this->stdvector.assign(10, -42);
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 
 		typename decltype(this->ftvector)::iterator it = this->ftvector.begin();
