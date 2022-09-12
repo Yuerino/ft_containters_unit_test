@@ -148,9 +148,11 @@ namespace {
 		g_vector_force_exception = ::NO_EXCEPTION;
 	};
 
-	TYPED_TEST(VectorTest, CtorConstructible) {
+	TYPED_TEST(VectorTest, RangeCtorConstructibleWithIteratorOnly) {
 		typedef typename decltype(this->ftvector)::value_type value_type;
-		typedef std::is_constructible<ft::vector<value_type>, DerivedInt, DerivedInt> isConstructible;
+
+		typedef std::is_constructible<std::vector<value_type>, DerivedInt, DerivedInt> isConstructible;
+
 		EXPECT_FALSE(isConstructible::value);
 	};
 
@@ -244,17 +246,15 @@ namespace {
 		g_vector_force_exception = ::NO_EXCEPTION;
 	};
 
-	TEST(VectorExplicitCtorTest, NotImplicit) {
+	TYPED_TEST(VectorTest, CtorImplicitOnly) {
 		// reason why typedef
 		// https://stackoverflow.com/questions/38030048/too-many-arguments-provided-to-function-like-macro-invocation
-		typedef std::is_convertible< std::allocator<int>, ft::vector<int> > isDefaultCtorImplicitIntegral;
-		EXPECT_FALSE(isDefaultCtorImplicitIntegral::value);
-		typedef std::is_convertible< std::allocator<DerivedInt>, ft::vector<DerivedInt> > isDefaultCtorImplicitNonIntegral;
-		EXPECT_FALSE(isDefaultCtorImplicitNonIntegral::value);
+		typedef typename decltype(this->ftvector)::value_type value_type;
 
-		typedef std::is_convertible<int, ft::vector<int> > isFillCtorImplicitIntegral;
-		EXPECT_FALSE(isFillCtorImplicitIntegral::value);
-		typedef std::is_convertible<DerivedInt, ft::vector<DerivedInt> > isFillCtorImplicitNonIntegral;
-		EXPECT_FALSE(isFillCtorImplicitNonIntegral::value);
+		typedef std::is_convertible< std::allocator<value_type>, ft::vector<value_type> > isDefaultCtorImplicit;
+		EXPECT_FALSE(isDefaultCtorImplicit::value);
+
+		typedef std::is_convertible<value_type, ft::vector<value_type> > isFillCtorImplicit;
+		EXPECT_FALSE(isFillCtorImplicit::value);
 	};
 }

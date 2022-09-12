@@ -16,7 +16,7 @@ CPPFLAGS		+=	-isystem $(GTEST_DIR)/include -isystem $(GMOCK_DIR)/include \
 					-isystem $(GTEST_DIR) -isystem $(GMOCK_DIR) \
 					-isystem $(TEST_HEADERS) -isystem . -I$(USER_HEADERS)
 
-CXXFLAGS		+=	-g -Wall -Wextra -Werror -pthread -std=c++17 -DTEST_EXACT -D VECTOR_DEBUG
+CXXFLAGS		+=	-g -Wall -Wextra -Werror -pthread -std=c++17 # -DTEST_EXACT -DVECTOR_DEBUG
 
 SRC				=	main.cpp
 OBJ				=	$(SRC:.cpp=.o)

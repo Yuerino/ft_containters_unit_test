@@ -901,4 +901,23 @@ namespace {
 
 		EXPECT_THAT(this->ftvector, ft::ContainerEq(this->stdvector));
 	}
+
+	template<typename T>
+	struct insert_range_invocable {
+		private:
+			template<typename _T>
+			static char _test(decltype(std::declval<std::vector<_T> >().insert(std::declval<typename std::vector<_T>::iterator>(), std::declval<DerivedInt>(), std::declval<DerivedInt>()))* = 0);
+			template<typename _T>
+			static int _test(...);
+
+		public:
+			static const bool value = sizeof(_test<T>(0)) == 1;
+	};
+	template<typename T>
+	const bool insert_range_invocable<T>::value;
+
+	TYPED_TEST(VectorTest, InsertRangeCallableWithIteratorOnly) {
+		typedef typename decltype(this->ftvector)::value_type value_type;
+		EXPECT_FALSE(insert_range_invocable<value_type>::value);
+	};
 }

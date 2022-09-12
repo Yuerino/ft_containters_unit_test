@@ -483,4 +483,23 @@ namespace {
 		EXPECT_GE(this->ftvector.capacity(), this->ftvector.size());
 		for (it = this->ftvector.begin(), ite = this->ftvector.end(); it != ite; ++it) ++(*it).nbr;
 	};
+
+	template<typename T>
+	struct assign_range_invocable {
+		private:
+			template<typename _T>
+			static char _test(decltype(std::declval<std::vector<_T> >().assign(std::declval<DerivedInt>(), std::declval<DerivedInt>()))* = 0);
+			template<typename _T>
+			static int _test(...);
+
+		public:
+			static const bool value = sizeof(_test<T>(0)) == 1;
+	};
+	template<typename T>
+	const bool assign_range_invocable<T>::value;
+
+	TYPED_TEST(VectorTest, AssignRangeCallableWithIteratorOnly) {
+		typedef typename decltype(this->ftvector)::value_type value_type;
+		EXPECT_FALSE(assign_range_invocable<value_type>::value);
+	};
 }

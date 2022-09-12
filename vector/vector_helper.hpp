@@ -32,48 +32,6 @@ extern int g_vector_force_exception = ::NO_EXCEPTION;
 
 // Fixture for testing
 namespace {
-	// struct BaseDerivedInt {
-	// 	int nbr;
-	// 	int* leak;
-
-	// 	BaseDerivedInt() : nbr(42), leak(0) { }
-	// 	BaseDerivedInt(const int& n) : nbr(n), leak(new int(69)) { }
-	// 	BaseDerivedInt(const int& n, int* l) : nbr(n), leak(l) { }
-	// 	BaseDerivedInt(const BaseDerivedInt& copy) : nbr(copy.nbr), leak(0) { }
-	// 	BaseDerivedInt& operator=(const BaseDerivedInt& other) {
-	// 		this->nbr = other.nbr;
-	// 		return *this;
-	// 	}
-	// 	virtual ~BaseDerivedInt() {
-	// 		this->nbr++;
-	// 		if (this->leak)
-	// 			delete this->leak;
-	// 		this->leak = NULL;
-	// 	}
-	// };
-
-	// struct DerivedInt : public BaseDerivedInt {
-	// 	DerivedInt() : BaseDerivedInt() { }
-	// 	DerivedInt(const int& n) : BaseDerivedInt(n, NULL) { }
-	// 	DerivedInt(const DerivedInt& copy) : BaseDerivedInt(copy.nbr, NULL) { }
-	// 	DerivedInt& operator=(const DerivedInt& other) {
-	// 		this->nbr = other.nbr;
-	// 		return *this;
-	// 	}
-	// 	DerivedInt(const BaseDerivedInt* base) : BaseDerivedInt() {
-	// 		if (base == NULL) return;
-	// 		if (base->nbr < 0) throw "42";
-	// 		this->nbr = base->nbr;
-	// 		this->leak = new int(69);
-	// 	}
-	// 	~DerivedInt() {
-	// 		this->nbr++;
-	// 		if (this->leak)
-	// 			delete this->leak;
-	// 		this->leak = NULL;
-	// 	}
-	// };
-
 	struct DerivedInt {
 		static int to_throw;
 		int nbr;
@@ -208,7 +166,8 @@ namespace {
 namespace ft {
 	template<typename T>
 	std::ostream& operator<<(std::ostream& os, const ft::vector<T>& v) {
-		os << "ft::vector: size: " << v.size() << ", capacity: " << v.capacity() << ", max size: " << v.max_size() << "\n[ ";
+		os << "ft::vector: size: " << v.size() << ", capacity: " << v.capacity() << ", max size: " << v.max_size() << std::endl;
+		std::cout << "[ ";
 		for (typename ft::vector<T>::const_iterator it = v.begin(); it != v.end(); ++it)
 			os << *it << " ";
 		os << "]";
@@ -217,7 +176,8 @@ namespace ft {
 
 	template<typename T>
 	std::ostream& operator<<(std::ostream& os, const std::vector<T>& v) {
-		os << "std::vector: size: " << v.size() << ", capacity: " << v.capacity() << ", max size: " << v.max_size() << "\n[ ";
+		os << "std::vector: size: " << v.size() << ", capacity: " << v.capacity() << ", max size: " << v.max_size() << std::endl;
+		std::cout << "[ ";
 		for (typename std::vector<T>::const_iterator it = v.begin(); it != v.end(); ++it)
 			os << *it << " ";
 		os << "]";
@@ -305,7 +265,7 @@ namespace ft {
 				}
 
 				// Print both container information
-				*os << std::endl << std::endl << lhs_stl_container << std::endl << expected_;
+				// *os << std::endl << std::endl << lhs_stl_container << std::endl << expected_;
 			}
 
 			return false;
